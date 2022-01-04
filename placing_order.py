@@ -36,6 +36,74 @@ def cal_total_cost(order_dict, store_dict):
     return int(total_cost)
 
 
+def check_user_item_input(item_id, store_dict):
+    """
+    This function is used to check the user item ID input is valid or not
+    :param item_id: ID of the items
+    :param store_dict: Dictionary of items in the store
+    :return: item_id (str)
+    """
+    # While loop to ask for input until the input is valid
+    while item_id not in store_dict:
+        item_id = input('Enter valid id again')
+    else:
+        return item_id
+
+
+def bill(orders, ls_cus, items, total, cus_id):
+    """
+    :param ls_cus: list customer (list)
+    :param cus_id: customer id (string)
+    :param orders: list product customer order (list)
+    :param total: total of money to pay the books (integer)
+    :param items: dictionary of all items in the store (dictionary)
+    :return: none
+    """
+    # Call function to print the customer info
+    list_cus(ls_cus, cus_id)
+    print("* " * 10)
+
+    # Call function to print the product info
+    print("product: ")
+    [list_item_info(items, k) for k, v in orders.items()]
+
+    # Calculate and print shipping fee based on the customer address
+    print("ship: {}".format(int(ls_cus[cus_id][-1]) * 15000))
+
+    # Calculate and print the total price customer have to pay
+    print("total price: {}".format(total + int(ls_cus[cus_id][-1]) * 15000))
+
+    # Check the discount amount based on the customer rank
+    discount = 0
+    if ls_cus[cus_id][2] == "Gold":
+        discount = total * 0.2
+    if ls_cus[cus_id][2] == "Silver":
+        discount = total * 0.1
+    print("discount: {}".format(discount))
+
+    # Calculate the final price customer have to pay
+    print("pay: {}".format(total - discount + int(ls_cus[cus_id][-1]) * 15000))
+
+
+def auto_promote(customer_id, customer_dict):
+    """
+    This function is used to auto promote the customer account when they meet the conditions
+    :param customer_id: ID of customer
+    :param customer_dict: Dictionary of customers
+    """
+    # Check if the customer meets the condition to be auto promoted to silver
+    if customer_dict[customer_id][2] == 'Bronze':
+        if customer_dict[customer_id][1] >= 5000000:
+            if customer_dict[customer_id][3] >= 50:
+                customer_dict[customer_id][2] = 'Silver'
+
+    # Check if the customer meets the condition to be auto promoted to gold
+    elif customer_dict[customer_id][2] == 'Silver':
+        if customer_dict[customer_id][1] >= 10000000:
+            if customer_dict[customer_id][3] >= 100:
+                customer_dict[customer_id][2] = 'Gold'
+
+
 def placing_order(store_dict, customer_dict):
     """
     This function is used to place order, calculate total cost and update the data of items and customers
@@ -61,6 +129,7 @@ def placing_order(store_dict, customer_dict):
         if item_id == 'N' or item_id == 'n':
             break
         else:
+            item_id = check_user_item_input(item_id, store_dict)
             item_quantity = int(input('Enter quantity: '))
             orders_list.append([item_id, item_quantity])
 
@@ -81,40 +150,15 @@ def placing_order(store_dict, customer_dict):
                     break
             orders_dict[k] = quantity
 
-        # Update number of orders
-        customer_dict[customer_id][3] += 1
+    # Update number of orders
+    customer_dict[customer_id][3] += 1
 
-        # Update number of total_money
-        total_cost = cal_total_cost(orders_dict, store_dict)
-        customer_dict[customer_id][1] += total_cost
+    # Update number of total_money
+    total_cost = cal_total_cost(orders_dict, store_dict)
+    customer_dict[customer_id][1] += total_cost
+
+    # Promote the customer rank if it meet the condition
+    auto_promote(customer_id,customer_dict)
 
     return orders_dict, int(total_cost), customer_id
 
-
-def bill(orders, ls_cus, items, total, cus_id):
-    """
-    :param ls_cus: list customer (list)
-    :param cus_id: customer id (string)
-    :param orders: list product customer order include product id, product price (list)
-    :param total: total of money to pay the books (integer)
-    :param items: list all item (dictionary)
-    :return: none
-    """
-    list_cus(ls_cus, cus_id)
-    print("* " * 10)
-
-    print("product: ")
-    [list_item_info(items, key) for key in orders.keys()]
-
-    print("ship: {}".format(int(ls_cus[cus_id][-1]) * 15000))
-
-    print("total price: {}".format(total + int(ls_cus[cus_id][-1]) * 15000))
-
-    discount = 0
-    if ls_cus[cus_id][2] == "Gold":
-        discount = total * 0.2
-    if ls_cus[cus_id][2] == "Silver":
-        discount = total * 0.1
-    print("discount: {}".format(discount))
-
-    print("pay: {}".format(total - discount + int(ls_cus[cus_id][-1]) * 15000))
