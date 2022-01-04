@@ -107,6 +107,7 @@ def auto_promote(customer_id, customer_dict):
 def placing_order(store_dict, customer_dict):
     """
     This function is used to place order, calculate total cost and update the data of items and customers
+    and promote
     :param store_dict: A dictionary of items in the store
     :param customer_dict: A dictionary of customer
     :return: final_order(dict), total_cost(int), customer_id(str)
@@ -161,4 +162,3 @@ def placing_order(store_dict, customer_dict):
     auto_promote(customer_id,customer_dict)
 
     return orders_dict, int(total_cost), customer_id
-
