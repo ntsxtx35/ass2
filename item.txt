@@ -1,0 +1,24 @@
+1001,Harry Potter and the Deadly Hollows,30,Mystery,196000
+1002,Beautiful Disaster,50,Romance,264000
+1003,The Lord of the Rings Trilogy,40, Fiction,373000
+1004,Crying in H Mart ,60, Memoir,300000
+1005,On Earth We are Briefly Gorgeous,30,Novel,430000
+1006,And They Lived Happily Ever After,20,Contemporary,494000
+1007, All Those Things We Never Said, 75, Romance, 250000
+1008, Her Final Breath, 30, Thriller, 200000
+1009, Les Miserables, 45, Historical Fiction, 340000
+1010, The Wright Brothers, 12, History, 450000
+1011, Seven Days for an Eternity, 50, Romance, 280000
+1012, Close to Home, 20, Thriller, 230000
+1013,The Last Hero, 50, Fantasy, 149000
+1014,The Son Of Neptune, 90, Fantasy, 130000
+1015,The Mark Of Athena, 60, Adventure, 189000
+1016,The House Of Hades, 70, Fantasy, 134000
+1017,The Blood Of Olympus, 30, Fantasy, 168000
+1018,The Lightning Thief, 190, Fantasy, 173000
+1019,IT, 50, Horror, 363000
+1020,The Da Vinci Code, 15, Detective, 163000
+1021,Les trois mousquetaires, 30, Novel, 169000
+1022,The count of Monte Cristo, 40, Advanture, 200000
+1023,The Woman in Black, 100, Horror, 297000
+1024,1776,50,History,230000
