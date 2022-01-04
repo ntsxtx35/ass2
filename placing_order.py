@@ -1,4 +1,3 @@
-from utils import clear
 import add_info
 from list_customer_info import list_cus
 from list_item_info import list_item_info, list_item
@@ -113,7 +112,6 @@ def placing_order(store_dict, customer_dict):
     :return: final_order(dict), total_cost(int), customer_id(str)
     """
     orders_list = []
-    total_cost = 0
 
     # Ask for user ID
     customer_id = input('Enter your customer ID: ')
@@ -162,3 +160,4 @@ def placing_order(store_dict, customer_dict):
     auto_promote(customer_id,customer_dict)
 
     return orders_dict, int(total_cost), customer_id
+
