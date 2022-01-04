@@ -1,2 +1,13 @@
 def list_cus(customers, customer_id):
-    print("Customer id: {}\nCustomer name: {}\nTotal money: {}\nPromotion: {}\nTotal billing: {}\nAddress: {}".format(customer_id, customers[str(customer_id)][0], customers[str(customer_id)][1], customers[str(customer_id)][2], customers[str(customer_id)][3], customers[str(customer_id)][4]))
+    """
+    :param customers: dictionary of customer
+    :param customer_id: the id of the customer (integer)
+    :return: none
+    """
+    # print customer information
+    print("Customer id: {}".format(customer_id))
+    print("Customer name: {}".format(customers[str(customer_id)][0]))
+    print("Total accumulated budget: {}".format(customers[str(customer_id)][1]))
+    print("Promotion: {}".format(customers[str(customer_id)][2]))
+    print("Total bills: {}".format(customers[str(customer_id)][3]))
+    print("Address: {}".format(customers[str(customer_id)][4]))

@@ -1,7 +1,8 @@
-import os
+from utils import clear
 import add_info
 from list_customer_info import list_cus
-from list_item_info import list_item_info,list_item
+from list_item_info import list_item_info, list_item
+
 
 # Create a dictionary of order using the order list
 def get_order_dict(order_lst):
@@ -90,7 +91,7 @@ def placing_order(store_dict, customer_dict):
     return orders_dict, int(total_cost), customer_id
 
 
-def bill( orders,ls_cus,items, total,cus_id ):
+def bill(orders, ls_cus, items, total, cus_id):
     """
     :param ls_cus: list customer (list)
     :param cus_id: customer id (string)
@@ -99,11 +100,21 @@ def bill( orders,ls_cus,items, total,cus_id ):
     :param items: list all item (dictionary)
     :return: none
     """
-    os.system("clear")
-    list_cus(ls_cus,cus_id)
-    [list_item_info(items,key) for key in orders.keys()]
-    print("ship: {}\ntotal price: {}".format(int(ls_cus[cus_id][-1]) * 15000, total + int(ls_cus[cus_id][-1]) * 15000))
-    discount = 0 if ls_cus[cus_id][2] == "Bronze" else (total * 0.2 if ls_cus[cus_id][2] == "Gold" else total * 0.1)
-    print("discount: {}\npay: {}".format(discount, total - discount + int(ls_cus[cus_id][-1]) * 15000))
+    list_cus(ls_cus, cus_id)
+    print("* " * 10)
 
+    print("product: ")
+    [list_item_info(items, key) for key in orders.keys()]
 
+    print("ship: {}".format(int(ls_cus[cus_id][-1]) * 15000))
+
+    print("total price: {}".format(total + int(ls_cus[cus_id][-1]) * 15000))
+
+    discount = 0
+    if ls_cus[cus_id][2] == "Gold":
+        discount = total * 0.2
+    if ls_cus[cus_id][2] == "Silver":
+        discount = total * 0.1
+    print("discount: {}".format(discount))
+
+    print("pay: {}".format(total - discount + int(ls_cus[cus_id][-1]) * 15000))

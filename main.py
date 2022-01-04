@@ -1,3 +1,4 @@
+from utils import clear
 import add_info
 import placing_order
 import file_IO
@@ -20,7 +21,6 @@ def print_menu():
           f'7. Add item/customer information\n'
           f'8. Promote\n'
           f'9. Filter items by genre\n'
-          f'10.Shipping manage\n'
           f'0. Exit')
 
 
@@ -29,23 +29,23 @@ def print_menu():
 
 
 print_menu()
-
-
-choice = int(input('Enter a number to select a feature: '))
-
-while choice != 0:
+choice =1
+while choice:
+    choice = int(input('Enter a number to select a feature: '))
     if choice == 1:
         list_item_info.list_item(items_dict)
     elif choice == 2:
         list_item_info.list_item(items_dict)
         item_id = input('Enter item ID: ')
-        list_item_info.list_item_info(items_dict,item_id)
-    elif choice == 6:
-        order_list,total,cus_id = placing_order.placing_order(items_dict, customers_dict)
-        placing_order.bill(order_list,customers_dict,items_dict,total,cus_id)
+        list_item_info.list_item_info(items_dict, item_id)
     elif choice == 5:
         customer_id = input('Enter customer id: ')
         list_customer_info.list_cus(customers_dict, customer_id)
+    elif choice == 6:
+        order_list,total,cus_id = placing_order.placing_order(items_dict, customers_dict)
+
+        placing_order.bill(order_list,customers_dict,items_dict,total,cus_id)
+
     elif choice == 7:
         add = input("Enter 'item' to add item and 'cus' to add customer: ")
         if add == 'item':
@@ -61,9 +61,10 @@ while choice != 0:
         pass
     else:
         print('Invalid option')
-
-    print_menu()
-    choice = int(input('Enter a number to select a feature: '))
+    choice = int(input('press any number to continuous, 0 to stop '))
+    if choice:
+        clear()
+        print_menu()
 
 file_IO.write_to_file(items_dict, 'output_items_file.txt')
 file_IO.write_to_file(customers_dict, 'output_customers_file.txt')
